@@ -8,7 +8,7 @@ var assert = require('assert')
 
 
 describe('gonpmGithub', function() {
-	it('be sane', function() {
+	it('should be sane', function() {
 		assert(!!gonpmGithub);
 	});
 
@@ -21,7 +21,7 @@ describe('gonpmGithub', function() {
 			(request.get.restore(), done());
 		});
 
-		it('throw if no param', function() {
+		it('should throw if no param', function() {
 			var throwFn = function () {
 				gonpmGithub.search();
 			};
@@ -29,7 +29,7 @@ describe('gonpmGithub', function() {
 			assert.throws(throwFn);
 		});
 
-		it('use the correct url', function() {
+		it('should use the correct url', function() {
 			gonpmGithub.search('jquery');
 
 			var expected = 'http://bower.herokuapp.com/packages/jquery';
@@ -40,7 +40,7 @@ describe('gonpmGithub', function() {
 	});
 
 	describe('resolve', function() {
-		it('find the repository', function(done) {
+		it('should find the repository', function(done) {
 			var file = fs.createReadStream(__dirname + '/sample.json');
 			var expected = 'https://github.com/jquery/jquery';
 
@@ -48,6 +48,16 @@ describe('gonpmGithub', function() {
 				if (err) done(err);
 
 				assert.equal(url, expected);
+				done();
+			});
+		});
+
+		it('should fail gracefully', function(done) {
+			var file = fs.createReadStream(__dirname + '/wrong-sample.txt');
+			var expected = 'https://github.com/jquery/jquery';
+
+			gonpmGithub.resolve(file, function (err, url) {
+				assert(err);
 				done();
 			});
 		});

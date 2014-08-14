@@ -1,7 +1,7 @@
 {
   "name": "gobower-github",
-  "version": "0.0.1",
-  "description": "A pretty simple and easy way to see the github page of a bower module.",
+  "version": "0.0.2",
+  "description": "Simple way to trigger a browser with the github page of a bower module",
   "main": "index.js",
   "bin": {
     "gobower-github": "bin/gobower-github",
